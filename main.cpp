@@ -20,17 +20,29 @@ std::string readInput() {
 }
 
 int main() {
+    // variable initialization
+    //micellaneous
     std::vector<std::string> tasks;
     std::string input;
-    int choice;
 
+    // choices
+    int choice;
     int addTask    = 1;
     int removeTask = 2;
     int viewTasks  = 3;
     int quit       = 4;
 
+    // colors
+    const std::string RED     = "\033[31m";
+    const std::string GREEN   = "\033[32m";
+    const std::string YELLOW  = "\033[33m";
+    const std::string BLUE    = "\033[34m";
+    const std::string MAGENTA = "\033[35m";
+    const std::string CYAN    = "\033[36m";
+    const std::string RESET   = "\033[0m";
+
     while (true) {
-        std::cout << "\n--- Todo List ---\n";
+        std::cout << "\n" << CYAN << "--- Todo List ---" << RESET << "\n";
         std::cout << addTask << ". Add task\n" << removeTask << ". Remove task\n"
                 << viewTasks << ". View tasks\n" << quit << ". Quit\n> ";
 
