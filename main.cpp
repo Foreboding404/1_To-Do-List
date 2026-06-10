@@ -1,6 +1,25 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
+
+const std::string FILENAME = "tasks.txt";
+
+void saveTasks(const std::vector<std::string>& tasks) {
+    std::ofstream file(FILENAME);
+    for (const std::string& task : tasks) {
+        file << task << "\n";
+    }
+}
+
+void loadTasks(std::vector<std::string>& tasks) {
+    std::ifstream file(FILENAME);
+    std::string line;
+    while (std::getline(file, line)) {
+        if (!line.empty())
+            tasks.push_back(line);
+    }
+}
 
 void printTasks(const std::vector<std::string>& tasks) {
     if (tasks.empty()) {
@@ -22,7 +41,6 @@ std::string readInput() {
 int main() {
     // variable initialization
     //micellaneous
-    std::vector<std::string> tasks;
     std::string input;
 
     // choices
@@ -40,6 +58,10 @@ int main() {
     const std::string MAGENTA = "\033[35m";
     const std::string CYAN    = "\033[36m";
     const std::string RESET   = "\033[0m";
+
+    // load at the start
+    std::vector<std::string> tasks;
+    loadTasks(tasks); 
 
     while (true) {
         std::cout << "\n" << CYAN << "--- Todo List ---" << RESET << "\n";
@@ -81,5 +103,7 @@ int main() {
             std::cout << "Invalid choice. Please try again.\n";
         }
     }
+
+    saveTasks(tasks);  // save when the loop exits
     return 0;
 }
